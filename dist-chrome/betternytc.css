@@ -1,0 +1,105 @@
+/* ----------------------------------------------------------------------------------- */
+/* Invert everything at 80% for nice gray tones */
+.darkmode body {
+    filter: invert(0.8);
+}
+
+/* Fill in some missing white bgs, so inversion does the trick everywhere */
+.darkmode .pz-content,
+.darkmode div.messaging-hasbro-no-extra {
+    background-color: #fff;
+}
+
+/* Un-invert the puzzle grid, and add some brightness to counteract the double inversion */
+.darkmode .xwd__svg {
+    filter: invert() brightness(2);
+}
+
+/* ----------------------------------------------------------------------------------- */
+/* Need good gray tones for normal cells, shaded cells, and pencil */
+.darkmode .xwd__cell--cell {
+    fill: #eee;
+}
+
+.darkmode .xwd__cell--shaded {
+    fill: #ccc;
+}
+
+.darkmode .xwd__cell--penciled ~ text:last-of-type {
+    fill: #aaa;
+}
+
+/* ----------------------------------------------------------------------------------- */
+/* Un-invert various other items on the page (ads, links to articles, other game icons */
+
+.darkmode .xwd__editorial-content--editorialCard .xwd__editorial-content--imgContainer {
+    filter: invert();
+}
+
+.darkmode .pz-ad {
+    filter: invert();
+}
+
+.darkmode .pz-footer .pz-icon {
+    filter: invert();
+}
+
+.darkmode .pz-nav-drawer__link::before {
+    filter: invert();
+}
+
+/* ----------------------------------------------------------------------------------- */
+/* Turn inverted oranges back to blues, in the game controls and clue lists */
+
+.darkmode .pz-game-toolbar {
+    filter: hue-rotate(180deg);
+}
+
+.darkmode .xwd__layout--cluelists {
+    filter: hue-rotate(180deg);
+}
+
+.darkmode .xwd__clue-bar-desktop--bar {
+    filter: hue-rotate(180deg);
+}
+
+.darkmode .xwd__modal--body {
+    filter: hue-rotate(180deg);
+}
+
+/* ----------------------------------------------------------------------------------- */
+/* Keep the same blue and yellow highlight colors in dark mode */
+
+.darkmode .xwd__cell--highlighted {
+    fill: #a7d8ff;
+}
+
+.darkmode .xwd__cell--highlighted.xwd__cell--shaded {
+    fill: #bad9f3;
+}
+
+.darkmode .xwd__cell--selected {
+    fill: #ffda00;
+}
+
+.darkmode .xwd__cell--selected.xwd__cell--shaded {
+    fill: #f3db4d;
+}
+
+.darkmode .xwd__cell--related {
+    fill: #ffeca0;
+}
+
+/* ----------------------------------------------------------------------------------- */
+/* Red pencil */
+
+.redpencil .xwd__cell--penciled ~ text:last-of-type,
+.darkmode.redpencil .xwd__cell--penciled ~ text:last-of-type {
+    fill: #f66;
+}
+
+.redpencil li.xwd__tool--button:nth-child(5) {
+    filter: hue-rotate(130deg);
+}
+
+/* ----------------------------------------------------------------------------------- */
