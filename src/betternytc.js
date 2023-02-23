@@ -9,6 +9,11 @@ const BETTER_NYTC_DATA = {
 const SELECTORS = {
   pauseButton: '.xwd__timer--button > button:nth-child(1)',
   continueButton: '.pz-moment__button',
+  cPanelSecondCol: 'div.xwd__settings-modal--column:nth-child(2)',
+  pencilButtonAnyState: '.xwd__toolbar_icon--pencil, .xwd__toolbar_icon--pencil-active',
+  puzzleRoot: '#pz-game-root',
+  modalZone: '#portal-game-modals',
+  settingsPanel: '#settings-panel',
 };
 
 function storeSettings() {
@@ -135,7 +140,7 @@ function handleKeyEvent(e) {
     // But if the counter reaches 4, the first 3 toggles go through and the 4th is ignored.
     // The net effect is that the writing tool is switched and stays switched.
     if (BETTER_NYTC_DATA.shiftCounter < 4) {
-      const icon = document.querySelector('.xwd__toolbar_icon--pencil, .xwd__toolbar_icon--pencil-active');
+      const icon = document.querySelector(SELECTORS.pencilButtonAnyState);
       icon.click();
     }
   }
@@ -196,17 +201,17 @@ async function startup() {
   }, 3000);
 
   // Set up key listening so that shift key controls pencil mode.
-  const board = document.querySelector('#pz-game-root');
+  const board = document.querySelector(SELECTORS.puzzleRoot);
   board.addEventListener('keydown', handleKeyEvent);
   board.addEventListener('keyup', handleKeyEvent);
 
   // Watch for the control panel modal. It is regenerated each time the user goes into
   // settings, so we need to add our controls each time.
-  const modalZone = document.querySelector('#portal-game-modals');
+  const modalZone = document.querySelector(SELECTORS.modalZone);
   const observer = new MutationObserver(info => {
-    const panel = document.querySelector('#settings-panel');
+    const panel = document.querySelector(SELECTORS.settingsPanel);
     if (panel) {
-      const colTwo = document.querySelector('div.xwd__settings-modal--column:nth-child(2)');
+      const colTwo = document.querySelector(SELECTORS.cPanelSecondCol);
       addControlsSection(colTwo);
     }
   });
