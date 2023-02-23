@@ -1,3 +1,10 @@
+## 1.2 (------)
+
+Enhancements:
+
+* Alt-P pauses/unpauses the timer
+  (...).
+
 ## 1.1 (221116)
 
 Bug Fixes:

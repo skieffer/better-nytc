@@ -6,6 +6,11 @@ const BETTER_NYTC_DATA = {
   shiftTimeout: null,
 };
 
+const SELECTORS = {
+  pauseButton: '.xwd__timer--button > button:nth-child(1)',
+  continueButton: '.pz-moment__button',
+};
+
 function storeSettings() {
   const keys = {
     darkMode: BETTER_NYTC_DATA.darkMode,
@@ -162,7 +167,34 @@ function setRedPencil(b) {
   storeSettings();
 }
 
+function getContinueButton() {
+  return document.querySelector(SELECTORS.continueButton);
+}
+
+function docKeyDown(e) {
+  // Pause/Unpause on Alt-P
+  if (e.code === "KeyP" && e.altKey) {
+    const continueButton = getContinueButton();
+    if (continueButton) {
+      continueButton.click();
+    } else {
+      document.querySelector(SELECTORS.pauseButton).click();
+    }
+  }
+}
+
+
 async function startup() {
+  // Global key listeners
+  document.addEventListener('keydown', docKeyDown);
+
+  // Tool tip "Alt-P" for pause/unpause.
+  // Seem to need a delay in Firefox (but not in Chrome).
+  setTimeout(() => {
+    const pauseButton = document.querySelector(SELECTORS.pauseButton);
+    pauseButton.setAttribute('title', 'Alt-P');
+  }, 3000);
+
   // Set up key listening so that shift key controls pencil mode.
   const board = document.querySelector('#pz-game-root');
   board.addEventListener('keydown', handleKeyEvent);
