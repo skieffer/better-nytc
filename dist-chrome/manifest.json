@@ -1,0 +1,21 @@
+{
+  "manifest_version": 3,
+  "name": "Better NYTC",
+  "version": "1.2",
+  "content_scripts": [
+    {
+      "matches": [
+        "*://www.nytimes.com/crosswords/game/*"
+      ],
+      "js": [
+        "betternytc.js"
+      ],
+      "css": [
+        "betternytc.css"
+      ]
+    }
+  ],
+  "permissions": [
+    "storage"
+  ]
+}
