@@ -6,6 +6,8 @@ A simple browser extension to improve the NY Times Crossword
 
 * **Pencil shift:** Hold shift to use pencil temporarily, double tap to switch.
 
+    - **Optionally:** Use Caps Lock instead of double tap to switch pencil
+
 * **Pause shortcut:** Use Alt-P (or Option-P) to pause/unpause the game.
 
 * **Dark mode (optional):** The dark mode preserves highlight colors and keeps shaded

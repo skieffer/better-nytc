@@ -5,6 +5,10 @@ Enhancements:
 * Alt-P pauses/unpauses the timer
   (...).
 
+* Provide an option to use Caps Lock instead of double-tapping shift, as a way of
+  switching to pencil mode
+  (...).
+
 ## 1.1 (221116)
 
 Bug Fixes:
