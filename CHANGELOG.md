@@ -1,3 +1,9 @@
+## 1.3 (------)
+
+Enhancements:
+
+* Make caps lock handling more responsive
+
 ## 1.2 (230225)
 
 Enhancements:

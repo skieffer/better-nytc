@@ -6,8 +6,7 @@ const BETTER_NYTC_DATA = {
   shiftCounter: 0,
   shiftTimeout: null,
   /* When the page loads, we don't know if caps lock is initially active or not.
-   * In all browsers, we can find out when the user first types a letter, without holding shift.
-   * In Chrome, we also find out as soon as caps lock is pressed (since keyup/keydown disambiguates).
+   * We can only find out on key events. So, we keep track of what we think.
    */
   weThinkCapsLockIsActive: false,
 };
@@ -161,24 +160,6 @@ function deactivatePencil() {
   }
 }
 
-// Flip our internal rep of whether caps lock is active
-function toggleInternalCapsLock() {
-  BETTER_NYTC_DATA.weThinkCapsLockIsActive = !BETTER_NYTC_DATA.weThinkCapsLockIsActive;
-  syncPencilWithCapsLock();
-}
-
-// Internally mark caps lock as active.
-function activateInternalCapsLock() {
-  BETTER_NYTC_DATA.weThinkCapsLockIsActive = true;
-  syncPencilWithCapsLock();
-}
-
-// Internally mark caps lock as inactive.
-function deactivateInternalCapsLock() {
-  BETTER_NYTC_DATA.weThinkCapsLockIsActive = false;
-  syncPencilWithCapsLock();
-}
-
 // IF we're set to use caps lock to control pencil, then put them in sync.
 function syncPencilWithCapsLock() {
   if (BETTER_NYTC_DATA.useCapsLock) {
@@ -190,19 +171,21 @@ function syncPencilWithCapsLock() {
   }
 }
 
-// Pass a key event. We return true if this event shows that caps lock is active.
-function eventShowsActualCapsLock(e) {
-  const k = e.key;
-  return k === k.toUpperCase() && k !== k.toLowerCase() && !e.shiftKey;
+// Check a key event for presence of caps lock, update our internal record, and
+// sync the pencil if desired.
+function handleCapsLock(e) {
+  BETTER_NYTC_DATA.weThinkCapsLockIsActive = e.getModifierState('CapsLock');
+  // Want shift to achieve temporary toggle, even when user has configured caps lock
+  // to control pencil. Therefore only sync if (a) the key was caps lock itself, or
+  // (b) shift is *not* held.
+  if (e.key === 'CapsLock' || !e.shiftKey) {
+    syncPencilWithCapsLock();
+  }
 }
 
 /* Key handler for events taking place in the puzzle area.
  */
 function puzzleAreaKeyEvent(e) {
-  // Detect actual caps lock:
-  if (eventShowsActualCapsLock(e)) {
-    activateInternalCapsLock();
-  }
   // Control pencil with shift:
   if (BETTER_NYTC_DATA.controlPencilWithShift && e.key === "Shift") {
     // We count all key-downs and key-ups of the shift key, but reset the counter if
@@ -225,6 +208,16 @@ function puzzleAreaKeyEvent(e) {
   }
 }
 
+/* We handle caps lock on both keydown and keyup.
+ * I have observed that the following events are triggered, on the caps lock key:
+ *   macOS
+ *     Firefox: keydown only
+ *     Chrome: keydown only when activating, keyup only when deactivating
+ *   Windows
+ *     Firefox: both keydown and keyup
+ *     Chrome: both keydown and keyup
+ */
+
 function docKeyDown(e) {
   // Pause/Unpause on Alt-P
   if (e.code === "KeyP" && e.altKey) {
@@ -236,25 +229,11 @@ function docKeyDown(e) {
     }
   }
   // Caps lock
-  if (e.code === "CapsLock") {
-    /* Chrome has the nice feature that when caps lock is activated, there is
-     * only a keydown event (no keyup), while on deactivation it is the opposite,
-     * i.e. only a keyup (no keydown). It is essentially like one long keypress.
-     * Unfortunately, this is not the case in Firefox. There, both presses simply
-     * result in a keydown event.
-     */
-    if (window.chrome) {
-      activateInternalCapsLock();
-    } else {
-      toggleInternalCapsLock();
-    }
-  }
+  handleCapsLock(e);
 }
 
 function docKeyUp(e) {
-  if (window.chrome && e.code === "CapsLock") {
-    deactivateInternalCapsLock();
-  }
+  handleCapsLock(e);
 }
 
 /* Set dark mode graphically, and also record the setting.
