@@ -1,8 +1,9 @@
-## 1.3 (------)
+## 1.3 (230304)
 
 Enhancements:
 
 * Make caps lock handling more responsive
+  ([#8](https://github.com/skieffer/better-nytc/pull/8)).
 
 ## 1.2 (230225)
 
