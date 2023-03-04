@@ -74,3 +74,49 @@ Finished! Now you can proceed to
 <https://addons.mozilla.org/> and <https://chrome.google.com/webstore/devconsole>
 to submit the releases for distribution. To access the releases, you can checkout
 the version tag, e.g. `git checkout v3.1`.
+
+## Mozilla Add-Ons
+
+Here you have to provide the source code, and notes for reviewers to reconstruct
+the distribution.
+
+### Preparing the source code
+
+1. Make a scrap directory
+2. Clone the project repo there
+3. CHECK OUT THE RELEASE VERSION, e.g. `git checkout v1.3`
+4. Delete the `dist-___` directories
+5. Make a `.zip` file for the cloned repo directory
+
+Upload the `.zip` file as your source code.
+
+### Reviewer Notes
+
+You can use something like the below, but be sure to check your node and npm versions,
+```
+    $ node --version
+    $ npm --version
+```
+and substitute these first!
+
+
+```
+Hi, and thanks for reviewing!
+
+## Build instructions
+
+I built with:
+    node  v16.13.2
+    npm   v8.1.2
+Other versions might also work, but I can't guarantee that.
+
+To build:
+
+1. Go to the project's root directory, and install the requirements:
+    npm install
+
+2. Build:
+    npm run build:moz
+
+This generates the `dist-mozilla` directory, which should be exactly the same as the files I uploaded.
+```
