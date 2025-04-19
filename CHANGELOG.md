@@ -1,6 +1,7 @@
 ## next (------)
 
-...
+* Re-invert game icons in hamburger menu
+  ([#10](https://github.com/skieffer/better-nytc/pull/10)).
 
 ## 1.3 (230304)
 
