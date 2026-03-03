@@ -1,3 +1,4 @@
+const browser = require("webextension-polyfill");
 import { setupDarkModeForExt } from "simple-dark-mode-toggle";
 
 function detectGame() {
@@ -31,9 +32,19 @@ async function setupToggle(gameTitle) {
     });
 }
 
-async function startup() {
+async function activateToggle() {
     const gameTitle = detectGame();
     await setupToggle(gameTitle);
+}
+
+async function startup() {
+    const options = await browser.storage.local.get({
+        activateOtherGamesDarkModeToggle: false,
+    });
+    const doActivate = options.activateOtherGamesDarkModeToggle;
+    if (doActivate) {
+        activateToggle();
+    }
 }
 
 startup();

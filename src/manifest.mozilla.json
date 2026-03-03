@@ -2,6 +2,16 @@
   "manifest_version": 2,
   "name": "Better NYTC",
   "version": "(placeholder)",
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "options_ui": {
+    "page": "options/options.html",
+    "open_in_tab": false
+  },
   "content_scripts": [
     {
       "matches": ["*://www.nytimes.com/crosswords/game/*"],

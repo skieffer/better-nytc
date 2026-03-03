@@ -8,13 +8,17 @@ module.exports = env => {
     return {
         entry: {
             othergames: './src/othergames.js',
+            options: './src/options/options.js',
+            background: './src/background.js',
         },
         output: {
             path: path_resolver.resolve(
                 __dirname,
                 chrome ? 'dist-chrome' : 'dist-mozilla'
             ),
-            filename: '[name].js',
+            filename: pathData => {
+                return pathData.chunk.name === 'options' ? '[name]/[name].js' : '[name].js';
+            },
         },
         mode: 'development',
         // According to [this](https://github.com/webpack/webpack/issues/4899#issuecomment-609737316),
@@ -25,6 +29,11 @@ module.exports = env => {
         plugins: [
             new CopyWebpackPlugin({
                 patterns: [
+                    {
+                        context: "src",
+                        from: "options",
+                        to: "options"
+                    },
                     {
                         context: "src",
                         from: "betternytc.css",
