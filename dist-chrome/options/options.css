@@ -1,0 +1,29 @@
+body {
+    background-color: #333333;
+    color: #eeeeee;
+    font-family: monospace;
+    text-align: justify;
+}
+
+p {
+    margin: 1em 0;
+}
+
+#content {
+    max-width: 40em;
+    margin: 0 auto;
+}
+
+.marginTopRow {
+    margin-top: 1em;
+}
+
+.footnote {
+    font-size: smaller;
+    padding: 0 3em;
+}
+
+label,
+input {
+    cursor: pointer;
+}

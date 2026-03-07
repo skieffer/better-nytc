@@ -1,0 +1,47 @@
+body.dark-mode {
+    filter: invert(0.8) hue-rotate(180deg);
+    background-color: #333;
+}
+
+#betternytc-dark-mode-toggle {
+    text-align: right;
+    margin-right: 2em;
+    margin-bottom: 0.5em;
+    font-size: 1.2em;
+    opacity: 0.8;
+}
+
+#betternytc-dark-mode-toggle:hover {
+    opacity: 1;
+}
+
+/* ----------------------------------------------------------------------------------- */
+/* In Connections, some of the colors look better with a little adjustment */
+
+.dark-mode section.SolvedCategory-module_solvedCategory___8phN[data-level="0"] {
+    background-color: #a28400;
+}
+
+.dark-mode section.SolvedCategory-module_solvedCategory___8phN[data-level="1"] {
+    /* Green is fine as it is. */
+}
+
+.dark-mode section.SolvedCategory-module_solvedCategory___8phN[data-level="2"] {
+    background-color: #9abaff;
+}
+
+.dark-mode section.SolvedCategory-module_solvedCategory___8phN[data-level="3"] {
+    background-color: #e7c3ee;
+}
+
+/* ----------------------------------------------------------------------------------- */
+/* Un-invert various other items on the page (ads etc.) */
+
+.dark-mode .pz-ad,
+.dark-mode .pz-byline,
+.dark-mode .LinkGroup-module_link__wwRAz .pz-icon
+{
+    filter: invert() hue-rotate(180deg);
+}
+
+/* ----------------------------------------------------------------------------------- */
