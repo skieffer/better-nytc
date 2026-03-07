@@ -1,3 +1,7 @@
+## next (------)
+
+...
+
 ## 1.4.0 (260307)
 
 * Provide dark mode for other games
