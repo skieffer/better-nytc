@@ -6,14 +6,19 @@ module.exports = env => {
     const chrome = !!args.chr;
 
     return {
-        // Need empty `entry` so Webpack doesn't try to compile a `main.js`.
         entry: {
+            othergames: './src/othergames.js',
+            options: './src/options/options.js',
+            background: './src/background.js',
         },
         output: {
             path: path_resolver.resolve(
                 __dirname,
                 chrome ? 'dist-chrome' : 'dist-mozilla'
-            )
+            ),
+            filename: pathData => {
+                return pathData.chunk.name === 'options' ? '[name]/[name].js' : '[name].js';
+            },
         },
         mode: 'development',
         // According to [this](https://github.com/webpack/webpack/issues/4899#issuecomment-609737316),
@@ -26,6 +31,11 @@ module.exports = env => {
                 patterns: [
                     {
                         context: "src",
+                        from: "options",
+                        to: "options"
+                    },
+                    {
+                        context: "src",
                         from: "betternytc.css",
                         to: "betternytc.css"
                     },
@@ -33,6 +43,11 @@ module.exports = env => {
                         context: "src",
                         from: "betternytc.js",
                         to: "betternytc.js"
+                    },
+                    {
+                        context: "src",
+                        from: "othergames.css",
+                        to: "othergames.css"
                     },
                     {
                         context: "src",

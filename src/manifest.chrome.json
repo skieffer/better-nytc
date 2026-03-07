@@ -2,11 +2,32 @@
   "manifest_version": 3,
   "name": "Better NYTC",
   "version": "(placeholder)",
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "options_ui": {
+    "page": "options/options.html",
+    "open_in_tab": false
+  },
   "content_scripts": [
     {
       "matches": ["*://www.nytimes.com/crosswords/game/*"],
       "js": ["betternytc.js"],
       "css": ["betternytc.css"]
+    },
+    {
+      "matches": [
+        "*://www.nytimes.com/games/connections*",
+        "*://www.nytimes.com/puzzles/letter-boxed*",
+        "*://www.nytimes.com/games/pips*",
+        "*://www.nytimes.com/puzzles/spelling-bee*",
+        "*://www.nytimes.com/games/strands*",
+        "*://www.nytimes.com/puzzles/sudoku*",
+        "*://www.nytimes.com/puzzles/tiles*"
+      ],
+      "js": ["othergames.js"],
+      "css": ["othergames.css"]
     }
   ],
   "permissions": [
