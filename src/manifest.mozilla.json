@@ -20,15 +20,13 @@
     },
     {
       "matches": [
-        "*://www.nytimes.com/games/connections",
-        "*://www.nytimes.com/puzzles/letter-boxed",
-        "*://www.nytimes.com/games/pips",
-        "*://www.nytimes.com/games/pips/*",
-        "*://www.nytimes.com/puzzles/spelling-bee",
-        "*://www.nytimes.com/games/strands",
-        "*://www.nytimes.com/puzzles/sudoku",
-        "*://www.nytimes.com/puzzles/sudoku/*",
-        "*://www.nytimes.com/puzzles/tiles"
+        "*://www.nytimes.com/games/connections*",
+        "*://www.nytimes.com/puzzles/letter-boxed*",
+        "*://www.nytimes.com/games/pips*",
+        "*://www.nytimes.com/puzzles/spelling-bee*",
+        "*://www.nytimes.com/games/strands*",
+        "*://www.nytimes.com/puzzles/sudoku*",
+        "*://www.nytimes.com/puzzles/tiles*"
       ],
       "js": ["othergames.js"],
       "css": ["othergames.css"]
