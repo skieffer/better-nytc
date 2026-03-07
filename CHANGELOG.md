@@ -1,4 +1,4 @@
-## next (------)
+## 1.4.0 (260307)
 
 * Provide dark mode for other games
   ([#11](https://github.com/skieffer/better-nytc/pull/11)).
