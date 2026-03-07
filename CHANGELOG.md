@@ -1,5 +1,7 @@
 ## next (------)
 
+* Provide dark mode for other games
+  ([#11](https://github.com/skieffer/better-nytc/pull/11)).
 * Re-invert game icons in hamburger menu
   ([#10](https://github.com/skieffer/better-nytc/pull/10)).
 
